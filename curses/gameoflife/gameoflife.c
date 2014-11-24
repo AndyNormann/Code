@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define MAPX 61
+#define MAPX 58
 #define MAPY 195
 
 //FPS controlls
@@ -26,9 +26,17 @@ void init_curses(){
     noecho();
     curs_set(0);
     nodelay(stdscr, 1);
+    keypad(stdscr, TRUE);
     start_color();
-    init_pair(1, COLOR_BLACK, COLOR_WHITE);
-    
+    init_pair(1, COLOR_BLACK, COLOR_WHITE);    
+}
+
+int kbhit(){
+    int ch = getch();
+    if(ch != ERR)
+        return ch;
+    else
+        return 0;
 }
 
 square **allocate_map(){
@@ -72,7 +80,8 @@ int neighbours(square **map, int x, int y){
     return retVal;
 }
 
-void draw(square **map){
+void draw(square **map, int mode){
+    erase();
     int i, j;
     for(i = 0; i<MAPX; i++){
         for(j = 0; j<MAPY; j++){
@@ -81,6 +90,16 @@ void draw(square **map){
             printw("%c", 32);
             attroff(COLOR_PAIR(map[i][j].cur));
         }
+    }
+    move(MAPX, 0);
+    printw("FPS: %d     ESC to quit     SPACE to pause      D to enter drawing mode    P to print to file      R to read from file      C to clear screen", FPS);
+    move(MAPX+1, 0);
+    if(mode == 0){
+        printw("Simulation mode");
+    }else if(mode == 1){
+        printw("Draw mode");
+    }else{
+        printw("Filename: ");
     }
 }
 
@@ -112,8 +131,143 @@ void gameoflife(square **map){
         }
     }
     update(map);
-    draw(map);
+    draw(map, 0);
 }
+
+void setNextToDead(square **map){
+    int i, j;
+    for (i = 0; i < MAPX; i++) {
+        for (j = 0; j < MAPY; j++) {
+           map[i][j].next = DEAD; 
+        }
+    }
+}
+void clearScr(square **map){
+    int i, j;
+    for (i = 0; i < MAPX; i++) {
+        for (j = 0; j < MAPY; j++) {
+            map[i][j].cur = DEAD;
+            map[i][j].next = DEAD;
+        }
+    }
+}
+
+void drawMode(square **map){
+    int c;
+    int x = MAPX/2 ,y = MAPY/2;
+
+    setNextToDead(map);
+
+    for(;;){
+        if((c = kbhit()) != 0){
+            switch(c){
+                case 258:
+                    if(x < MAPX-1)
+                        x++;
+                    break;
+                case 259:
+                    if(x > 0)
+                        x--;
+                    break;
+                case 260:
+                    if(y > 0)
+                        y--;
+                    break;
+                case 261:
+                    if(y < MAPY-1)
+                        y++;
+                    break;
+                case 27:
+                    return;
+                case 100:
+                    return;
+                case 10:
+                    map[x][y].cur = LIVE;
+                    break;
+                case 127:
+                    map[x][y].cur = DEAD;
+                    break;
+            } 
+            draw(map, 1);
+            move(x, y);
+            attron(COLOR_PAIR(map[x][y].cur));
+            printw("@");
+            attroff(COLOR_PAIR(map[x][y].cur));
+
+        }
+    }
+}
+
+
+void writeFile(square **map){
+    curs_set(1);
+    nodelay(stdscr, 0);
+    echo();
+    
+    char buffer[50];
+    FILE *out;
+    int i, j;
+
+    draw(map, 2);
+    move(MAPX+1, 10);
+    scanw("%s", &buffer);
+
+    out = fopen(buffer, "w");
+
+    for (i = 0; i < MAPX; i++) {
+        for (j = 0; j < MAPY; j++) {
+            fprintf(out, "%d", map[i][j].cur);
+        }
+        fprintf(out, "\n");
+    }
+
+    curs_set(0);
+    noecho();
+    nodelay(stdscr, 1); 
+}
+
+void readFile(square **map){
+    curs_set(1);
+    echo();
+    nodelay(stdscr, 0);
+
+    char buffer[MAPY*2];
+    FILE *in;
+    int i = 0, j;
+
+    setNextToDead(map);
+
+    draw(map, 2);
+    move(MAPX+1, 10);
+    scanw("%s", &buffer);
+    
+    in = fopen(buffer, "r");
+
+    if(in == NULL){
+        draw(map, 2);
+        move(MAPX+1, 0);
+        printw("Could not open file %s", buffer);
+
+        getch();
+        curs_set(0);
+        noecho();
+        nodelay(stdscr, 1);
+
+        return;
+    }
+    
+    while(fgets(buffer, sizeof(buffer), in) != NULL){
+       for (j = 0; j < MAPY; j++) {
+           map[i][j].cur = buffer[j]-48;
+       } 
+       i++;
+    }
+    curs_set(0);
+    noecho();
+    nodelay(stdscr, 1);
+    draw(map, 0);
+}
+
 
 int main(void){
     square **map;
@@ -124,12 +278,13 @@ int main(void){
     map = allocate_map();
 
     //Glider 
+    /*
     map[5][5].cur = LIVE;
     map[5][6].cur = LIVE;
     map[5][7].cur = LIVE;
     map[4][7].cur = LIVE;
     map[3][6].cur = LIVE;
-    
+    */
 
     //Ocilator
     /*
@@ -138,10 +293,33 @@ int main(void){
     map[7][5].cur = LIVE;
     */
 
-    while((c = getch()) != 27){
-        if(c == 32){
-            if(pause == 0) pause = 1;
-            else if(pause == 1) pause = 0;
+    for(;;){
+        if((c = kbhit()) != 0){
+            switch(c){
+                case 32:
+                    if(pause == 0) pause = 1;
+                    else if(pause == 1) pause = 0;
+                    break;
+                case 27:
+                    destruct(map);
+                    return 0;
+                case 100:
+                    pause = 1;
+                    drawMode(map);
+                    break;
+                case 112:
+                    writeFile(map);
+                    break;
+                case 114:
+                    readFile(map);
+                    pause = 1;
+                    break;
+                case 99:
+                    clearScr(map);
+                    draw(map, 0);
+                    pause = 1;
+                    break;
+            }
         }
         if(pause == 0)
             gameoflife(map);
