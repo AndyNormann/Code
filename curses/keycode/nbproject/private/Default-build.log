@@ -1,0 +1,4 @@
+gcc -Wall -Wextra -lncurses -o main test.cpp
+gcc: error: test.cpp: No such file or directory
+Makefile:2: recipe for target 'all' failed
+make: *** [all] Error 1

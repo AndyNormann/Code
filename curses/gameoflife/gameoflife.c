@@ -325,7 +325,6 @@ int main(void){
             gameoflife(map);
         usleep(SECOND/FPS);
     }
-
     destruct(map);
     return 0;
 }

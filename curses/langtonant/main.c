@@ -66,18 +66,18 @@ void moveAnt(){
 
     //Rotates ant
     switch(ant->rot){
-        case 1:
-            ant->y++;
-            break;
-        case 2:
-            ant->x++;
-            break;
-        case 3:
-            ant->y--;
-            break;
-        case 4:
-            ant->x--;
-            break;
+    case 1:
+        ant->y++;
+        break;
+    case 2:
+        ant->x++;
+        break;
+    case 3:
+        ant->y--;
+        break;
+    case 4:
+        ant->x--;
+        break;
     }
     //Makes sure the ant doesen't leave the grid
     if(ant->y >= MAPH-1)
@@ -107,6 +107,7 @@ void drawMap(){
     attron(COLOR_PAIR(color[ant->x+(ant->y*MAPW)]));
     printw("%c", '@');
     attroff(COLOR_PAIR(color[ant->x+(ant->y*MAPW)]));
+    refresh();
 }
 
 int main(void){

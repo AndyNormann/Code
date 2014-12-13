@@ -1,0 +1,10 @@
+called: gcc
+	/home/maiestro/git/Code/curses/keycode
+	gcc
+	-Wall
+	-Wextra
+	-lncurses
+	-o
+	main
+	test.cpp
+
