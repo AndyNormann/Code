@@ -1,3 +1,3 @@
 all:
-	g++ -lSDL -lSDL_image -p basicWindow basicWindow.cpp
+	g++ -lSDL -lSDL_image -o basicWindow basicWindow.cpp
 

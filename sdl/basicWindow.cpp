@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
         return 1;
 
     //set up screen region
-    screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE);
+    screen = SDL2_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE);
     
     if(screen == NULL)
         return 1;
