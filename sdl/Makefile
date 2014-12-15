@@ -1,3 +1,6 @@
 all:
-	g++ -lSDL -lSDL_image -o basicWindow basicWindow.cpp
-
+	g++ -lSDL2 -std=c++11 template.cpp -o temp
+clean: all
+	rm temp
+run:
+	./temp
