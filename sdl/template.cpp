@@ -1,71 +1,106 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "cleanup.hpp"
+#include "helper.hpp"
 
-const int SCREEN_HEIGHT = 640;
-const int SCREEN_WIDTH = 480;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+const int TILE_SIZE = 40;
+
 
 int main(int argc, const char *argv[])
 {
-    SDL_Window *window;
-
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
         std::cout << "SDL init error: " << SDL_GetError() << std::endl;
         return 1;
     }
 
-
-    window = SDL_CreateWindow(
+    //Window
+    SDL_Window *window = SDL_CreateWindow(
             "Hello, is it me you're looking for?",
             0,
             0,
-            SCREEN_HEIGHT,
             SCREEN_WIDTH,
+            SCREEN_HEIGHT,
             SDL_WINDOW_SHOWN
             );
 
     if(window == nullptr){
-        std::cout << "Window creation error " << SDL_GetError() << std::endl;
+        logSDLError(std::cout, "Window creation");
         SDL_Quit();
         return 1;
     }
 
+
+    //Renderer
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1 , SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     if(renderer == nullptr){
         cleanup(window);
-        std::cout << "SDL Renderer error" << SDL_GetError() << std::endl;
+        logSDLError(std::cout, "Renderer creation");
+        SDL_Quit();
+        return 1;
+    }
+ 
+    //Load Textures
+    SDL_Texture *image = loadTexture("image.png", renderer);
+    SDL_Texture *background = loadTexture("background.png", renderer);
+
+    if(image == nullptr || background == nullptr){
+        cleanup(window, renderer, image, renderer);
+        IMG_Quit();
         SDL_Quit();
         return 1;
     }
 
-    std::string image_path = "ebola.bmp";
-    SDL_Surface *bmp = SDL_LoadBMP(image_path.c_str());
+    //Determine clips
+    int iW = 100, iH = 100;
+    int x = SCREEN_WIDTH / 2 - iW / 2;
+    int y = SCREEN_HEIGHT / 2 - iH / 2;
 
-    if(bmp == nullptr){
-        cleanup(window, renderer);
-        std::cout << "Image loading error" << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return 1;
+    SDL_Rect clips[4];
+    for (int i = 0; i < 4; i++) {
+        clips[i].x = i / 2 * iW;
+        clips[i].y = i % 2 * iH;
+        clips[i].w = iW;
+        clips[i].h = iH;
     }
 
-    SDL_Texture *tex = SDL_CreateTextureFromSurface(renderer, bmp);
-    SDL_FreeSurface(bmp);
-    if(tex == nullptr){
-        cleanup(window, renderer);
-        std::cout << "Texture error" << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return 1;
+
+    int useClip = 0;
+
+    SDL_Event e;
+    bool quit = false;
+    while(!quit){
+        while(SDL_PollEvent(&e)){
+            if(e.type == SDL_QUIT)
+                quit = true;
+            if(e.type == SDL_KEYDOWN){
+                switch(e.key.keysym.sym){
+                    case SDLK_1:
+                        useClip = 0;
+                        break;
+                    case SDLK_2:
+                        useClip = 1;
+                        break;
+                    case SDLK_3:
+                        useClip = 2;
+                        break;
+                    case SDLK_4:
+                        useClip = 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        SDL_RenderClear(renderer);
+        renderTexture(image, renderer, x, y, &clips[useClip]);
+        SDL_RenderPresent(renderer);
     }
 
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, tex, NULL, NULL);
-    SDL_RenderPresent(renderer);
-
-    SDL_Delay(3000);
-
-    cleanup(window, renderer, tex);
-
+    cleanup(window, renderer, image, background);
+    IMG_Quit();
     SDL_Quit();
 
     return 0;

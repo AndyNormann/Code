@@ -2,9 +2,6 @@
 #include "binaryTree.hpp"
 #include <string>
 
-int hello();
-
-
 int main(int argc, char** argv){
     bt_root tree(5);
 
@@ -20,13 +17,7 @@ int main(int argc, char** argv){
     tree.add(22);
 
 
-
     tree.printTree();
 
     return 0;
-}
-
-
-int hello(){
-    return 5;
 }

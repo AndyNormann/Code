@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define MAPX 58
-#define MAPY 195
+#define MAPX 40
+#define MAPY 100
 
 //FPS controlls
 #define FPS 20
