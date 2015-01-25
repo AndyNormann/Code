@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define GUY_AMOUNT 20
+#define GOOD_GUY_AMOUNT 20
+#define BAD_GUY_AMOUNT 20
 #define ALB 5
 #define AHB 15
 #define DLB 1
@@ -18,14 +19,14 @@ typedef struct Guy{
     float evasion;
 } guy;
 
-guy* setup_guys(){
+guy* setup_guys(int num){
     int i;
-    guy* retVal = malloc(sizeof(guy)*GUY_AMOUNT);
+    guy* retVal = malloc(sizeof(guy)*num);
 
     srand(time(NULL));
 
     printf("At De Hp Ev\n");
-    for (i = 0; i < GUY_AMOUNT; i++) {
+    for (i = 0; i < num; i++) {
         retVal[i].atck = (rand() % AHB) + ALB;
         retVal[i].def = (rand() % DHB) + DLB;
         retVal[i].health = (rand() % HHB) + HLB;
@@ -37,7 +38,7 @@ guy* setup_guys(){
 
 int simulate(guy* good_guys, guy* bad_guys){
     int i = 0, j = 0;
-    while(i <= GUY_AMOUNT && j <= GUY_AMOUNT){
+    while(i <= GOOD_GUY_AMOUNT && j <= BAD_GUY_AMOUNT){
         printf("Good guy nr: %d %d %d %d %f\n", i, good_guys[i].atck, good_guys[i].def, good_guys[i].health, good_guys[i].evasion);
         printf("Bad guy nr: %d %d %d %d %f\n", j, bad_guys[i].atck, bad_guys[i].def, bad_guys[i].health, bad_guys[i].evasion);
 
@@ -51,7 +52,7 @@ int simulate(guy* good_guys, guy* bad_guys){
         }
     }
     if(i > j)
-        return 0;
+        return 1;
     else
         return -1;
 }
@@ -61,13 +62,13 @@ int main(/*int argc, const char *argv[]*/)
     guy* good_guys;
     guy* bad_guys;
     printf("Good_guys\n");
-    good_guys = setup_guys(); 
+    good_guys = setup_guys(GOOD_GUY_AMOUNT); 
     getchar();
     printf("Bad_guys\n");
-    bad_guys = setup_guys();
+    bad_guys = setup_guys(BAD_GUY_AMOUNT);
 
     getchar();
-    if(simulate(good_guys, bad_guys)){
+    if(simulate(good_guys, bad_guys) == 1){
         printf("Good guys win\n");
     }else{
         printf("Bad guys win\n");
