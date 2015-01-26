@@ -7,9 +7,9 @@
 #define ALB 5
 #define AHB 15
 #define DLB 1
-#define DHB 6
-#define HLB 5
-#define HHB 20
+#define DHB 3
+#define HLB 10
+#define HHB 50
 #define EHB 4
 
 typedef struct Guy{
@@ -38,7 +38,7 @@ guy* setup_guys(int num){
 
 int simulate(guy* good_guys, guy* bad_guys){
     int i = 0, j = 0;
-    while(i <= GOOD_GUY_AMOUNT && j <= BAD_GUY_AMOUNT){
+    while(i < GOOD_GUY_AMOUNT && j < BAD_GUY_AMOUNT){
         printf("Good guy nr: %d %d %d %d %f\n", i, good_guys[i].atck, good_guys[i].def, good_guys[i].health, good_guys[i].evasion);
         printf("Bad guy nr: %d %d %d %d %f\n", j, bad_guys[i].atck, bad_guys[i].def, bad_guys[i].health, bad_guys[i].evasion);
 
@@ -57,7 +57,7 @@ int simulate(guy* good_guys, guy* bad_guys){
         return -1;
 }
 
-int main(/*int argc, const char *argv[]*/)
+int main()
 {
     guy* good_guys;
     guy* bad_guys;
