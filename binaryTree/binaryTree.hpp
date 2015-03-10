@@ -63,18 +63,5 @@ typedef struct Bt_Root{
         }
     }
 } bt_root;
-/*
-int main(int argc, char** argv){
-    bt_root root(5);
-    root.add(6);
-    root.add(2);
-    root.add(4);
-    root.add(6);
-    root.add(7);
-    root.add(12);
-    root.printTree();
-    return 0;
-}
-*/
 
 
