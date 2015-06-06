@@ -158,12 +158,12 @@ void changeLColor(sf::Color color)
 {
     using namespace sf;
     if(color ==  Color::Black){
-        setAntColor(Color::Green);
-    }else if(color == Color::Green){
+        setAntColor(Color::Magenta);
+    }else if(color == Color::Magenta){
         setAntColor(Color::Red);
     }else if(color == Color::Red){
         setAntColor(Color::Cyan);
-    }else if(color == Color::Magenta){
+    }else if(color == Color::Green){
         setAntColor(Color::Yellow);
     }else if(color == Color::Yellow){
         setAntColor(DARK_BLUE);
@@ -186,7 +186,7 @@ void changeRColor(sf::Color color)
     }else if(color == Color::Blue){
         setAntColor(Color::Black);
     }else if(color == Color::Cyan){
-        setAntColor(Color::Magenta);
+        setAntColor(Color::Green);
     }else if(color == DARK_RED){
         setAntColor(DARK_GREEN);
     }else if(color == DARK_GREEN){

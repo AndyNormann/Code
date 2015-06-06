@@ -36,6 +36,7 @@ guy* setup_guys(int num){
     return retVal;
 }
 
+//returns 1 if good guys win and 0 if bad guys win
 int simulate(guy* good_guys, guy* bad_guys){
     int i = 0, j = 0;
     while(i < GOOD_GUY_AMOUNT && j < BAD_GUY_AMOUNT){
@@ -44,10 +45,10 @@ int simulate(guy* good_guys, guy* bad_guys){
 
         good_guys[i].health -= bad_guys[j].atck - (good_guys[i].def/2);
         bad_guys[j].health -= good_guys[i].atck - (bad_guys[i].def/2);
-        if(good_guys[i].health <= 0){ 
+        if(good_guys[i].health <= 0){
             i++;
         }
-        if(bad_guys[j].health <= 0){ 
+        if(bad_guys[j].health <= 0){
             j++;
         }
     }
@@ -62,7 +63,7 @@ int main()
     guy* good_guys;
     guy* bad_guys;
     printf("Good_guys\n");
-    good_guys = setup_guys(GOOD_GUY_AMOUNT); 
+    good_guys = setup_guys(GOOD_GUY_AMOUNT);
     getchar();
     printf("Bad_guys\n");
     bad_guys = setup_guys(BAD_GUY_AMOUNT);
@@ -78,4 +79,3 @@ int main()
     free(bad_guys);
     return 0;
 }
-

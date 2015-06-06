@@ -16,7 +16,6 @@ int main(int argc, char** argv){
     tree.add(10);
     tree.add(22);
 
-
     tree.printTree();
 
     return 0;

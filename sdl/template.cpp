@@ -67,6 +67,9 @@ int main(int argc, const char *argv[])
 
 
     int useClip = 0;
+    int updown = 0; //0 up, 1 down
+    int leftright = 0; //0 left, 1 right
+    bool move = false;
 
     SDL_Event e;
     bool quit = false;
@@ -74,6 +77,10 @@ int main(int argc, const char *argv[])
         while(SDL_PollEvent(&e)){
             if(e.type == SDL_QUIT)
                 quit = true;
+            SDL_Event events;
+            int mouseX = events.motion.x;
+            int mouseY = events.motion.y;
+            //std::cout << "X: " << mouseX << " Y: " << mouseY << std::endl;
             if(e.type == SDL_KEYDOWN){
                 switch(e.key.keysym.sym){
                     case SDLK_1:
@@ -88,9 +95,52 @@ int main(int argc, const char *argv[])
                     case SDLK_4:
                         useClip = 3;
                         break;
+                    case SDLK_UP:
+                        updown = 0;
+                        break;
+                    case SDLK_DOWN:
+                        updown = 1;
+                        break;
+                    case SDLK_LEFT:
+                        leftright = 0;
+                        break;
+                    case SDLK_RIGHT:
+                        leftright =1;
+                        break;               
+                    case SDLK_SPACE:
+                        if(move)
+                            move = false;
+                        else
+                            move = true;
+                        break;
                     default:
                         break;
                 }
+            }
+        }
+
+        if(move){
+            if(updown == 0){
+                y--;
+            }else{
+                y++;
+            }
+
+            if(leftright == 0){
+                x--;
+            }else{
+                x++;
+            }
+
+            if(x >= SCREEN_WIDTH){
+                x = -100;
+            }else if(x <= -100){
+                x = SCREEN_WIDTH;
+            }
+            if(y >= SCREEN_HEIGHT){
+                y = -100;
+            }else if(y <= -100){
+                y = SCREEN_HEIGHT;
             }
         }
 
