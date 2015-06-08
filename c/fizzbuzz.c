@@ -1,9 +1,11 @@
 #include <stdio.h>
+
 /*
  * Print the values from 1 to 100, if a number is a multiple of 3, print fizz instead.
  * If a number is a multiple of 5, print buzz instead. If a number is a multiple of both
  * 3 and 5, print fizzbuzz.
 */
+
 int main()
 {
     int i;
