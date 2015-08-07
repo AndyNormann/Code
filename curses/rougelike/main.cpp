@@ -169,7 +169,7 @@ int main(int argc, char** argv){
         attroff(COLOR_PAIR(curColor));
         curColor = rand() % 8;
         attron(COLOR_PAIR(curColor));
-        if(kbhit){
+        if(kbhit()){
             c = getch();
             moveHero(c, hero);
             if(map[hero->x][hero->y] == '$'){

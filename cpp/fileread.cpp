@@ -4,7 +4,7 @@
 #include <iterator>
 #include <vector>
 
-#include "huffread.h"
+#include "fileread.h"
 
 int main(int argc, const char *argv[])
 {

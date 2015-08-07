@@ -2,7 +2,7 @@
 #include <sstream>
 
 #define WINDOW_HEIGHT 1400
-#define WINDOW_WIDTH 1400 
+#define WINDOW_WIDTH 1400
 
 #define SQUARE_SIZE 10
 
@@ -29,7 +29,7 @@ sf::RectangleShape grid[GRID_H][GRID_W];
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "langton's ant");
-    
+
     ant_x = (GRID_W/2)+30;
     ant_y = (GRID_H/2)+100;
     direction = Up;
@@ -140,12 +140,12 @@ void moveAnt(sf::Color color)
     }
 }
 
-// Color pattern RL R == Black L == White 
+// Color pattern RL R == Black L == White
 // New pattern LLRR L == White L == Red R == Black R == Green
-// Wanted pattern LRRRRRLLR L == White R == Blue R == Green R == Red R == Cyan R == Magenta L == Black L == Yellow R == DARK_BLUE 
+// Wanted pattern LRRRRRLLR L == White R == Blue R == Green R == Red R == Cyan R == Magenta L == Black L == Yellow R == DARK_BLUE
 // R colors: Blue, Green, Red, Cyan, Magenta, DARK_BLUE
 // L colors: White, Black, Yellow
-// RRLLLRLLLRRR R == White R == Blue L == Black L = Green L == Red R == Cyan L == Magenta L == Yellow L == DARK_BLUE R == DARK_RED R == DARK_GREEN R == GRAY 
+// RRLLLRLLLRRR R == White R == Blue L == Black L = Green L == Red R == Cyan L == Magenta L == Yellow L == DARK_BLUE R == DARK_RED R == DARK_GREEN R == GRAY
 // R colors: White, Blue, Cyan, DARK_RED, DARK_GREEN, GRAY
 // L colors: Black, Green, Red, Magenta, Yellow, DARK_BLUE
 
@@ -172,12 +172,12 @@ void changeLColor(sf::Color color)
     }
 }
 
-// RRLLLRLLLRRR 
-// R == White R == Blue 
-// L == Black L = Green L == Red 
-// R == Cyan 
-// L == Magenta L == Yellow L == DARK_BLUE 
-// R == DARK_RED R == DARK_GREEN R == GRAY 
+// RRLLLRLLLRRR
+// R == White R == Blue
+// L == Black L = Green L == Red
+// R == Cyan
+// L == Magenta L == Yellow L == DARK_BLUE
+// R == DARK_RED R == DARK_GREEN R == GRAY
 void changeRColor(sf::Color color)
 {
     using namespace sf;

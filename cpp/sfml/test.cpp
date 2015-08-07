@@ -3,7 +3,6 @@
 #define WINDOW_HEIGHT 600
 #define WINDOW_WIDTH 800
 
-
 int main()
 {
     float x = 0;

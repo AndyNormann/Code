@@ -47,7 +47,6 @@ int main()
             grid[i][j] = sf::RectangleShape(squareSize);
             grid[i][j].setPosition(i*SQUARE_SIZE, j*SQUARE_SIZE);
             grid[i][j].setFillColor(GRAY);
-
         }
     }
 

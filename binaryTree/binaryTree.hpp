@@ -15,7 +15,6 @@ typedef struct Bt_Node{
 typedef struct Bt_Root{
     int amount;
     bt_node *root;
-    
 
     public:
     Bt_Root(int rootVal){ 
@@ -63,5 +62,3 @@ typedef struct Bt_Root{
         }
     }
 } bt_root;
-
-
