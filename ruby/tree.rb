@@ -4,6 +4,7 @@ class Node
         @left = nil
         @right = nil
         @data = val
+        @moredata = nil
     end
 
     def add(input)
