@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-    root='demo/index'
+    get 'demo/index' => 'demo/index'
+
+    root 'demo#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
