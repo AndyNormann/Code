@@ -2,17 +2,32 @@
 #include <fstream>
 #include <sstream>
 
+std::stringstream hello_world_c;
+
+void insert_line(std::stringstream &output, std::string str, int indent)
+{
+    for (int i = 0; i < indent; ++i) {
+        output << "\t";
+    }
+    output << str;
+    output << "\n";
+}
+
+void add(std::string str, int indent){
+    insert_line(hello_world_c, str, indent);
+}
+
 int main()
 {
     std::ofstream output_file;
     output_file.open("output.c");
-    std::stringstream hello_world_c;
 
-    hello_world_c << "#include <stdio.h>\n\n";
-    hello_world_c << "int main(int argc, char **argv){\n";
-    hello_world_c << "    printf(\"hallaverden\\n\");\n";
-    hello_world_c << "    return 0;\n";
-    hello_world_c << "}\n";
+    add("#include <stdio.h>", 0);
+    add("int main()", 0);
+    add("{", 0);
+    add("printf(\"skjera\");", 1);
+    add("return 0;", 1);
+    add("}", 0);
     
     output_file << hello_world_c.str();
 
