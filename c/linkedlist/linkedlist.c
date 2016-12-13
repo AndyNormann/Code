@@ -6,7 +6,7 @@ typedef struct node {
     struct node *next;
 } Node;
 
-Node *make_node(int data){
+Node *make_node(int data) {
     Node *ret_val = malloc(sizeof(Node));
     ret_val->data = data;
     ret_val->next = NULL;
@@ -18,20 +18,20 @@ Node *end;
 Node *mid;
 int count;
 
-void set_mid(){
+void set_mid() {
     Node *current = root;
     int i;
-    for (i = 0; i < count/2; i++) {
+    for (i = 0; i < count / 2; i++) {
         current = current->next;
     }
     mid = current;
 }
 
-void add(int to_add){
-    if(root == NULL){
+void add(int to_add) {
+    if (root == NULL) {
         root = make_node(to_add);
         end = root;
-    }else{
+    } else {
         end->next = make_node(to_add);
         end = end->next;
     }
@@ -39,27 +39,26 @@ void add(int to_add){
     set_mid();
 }
 
-void print_list(){
+void print_list() {
     Node *current;
     for (current = root; current != NULL; current = current->next) {
         printf("%d\n", current->data);
     }
 }
 
-void read_file(const char* filename){
+void read_file(const char *filename) {
     FILE *file = fopen(filename, "r");
 
     int ret = 1;
     int buf = 0;
 
-    while((ret = fscanf(file, "%d", &buf)) != EOF){
+    while ((ret = fscanf(file, "%d", &buf)) != EOF) {
         add(buf);
     }
     fclose(file);
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     if (argc != 2) {
         printf("Usage: %s <filename>\n", argv[0]);
         return -1;

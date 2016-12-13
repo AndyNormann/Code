@@ -2,7 +2,7 @@
 #include "binaryTree.hpp"
 #include <string>
 
-int main(int argc, char** argv){
+int main(){
     bt_root tree(5);
 
     tree.add(5);
