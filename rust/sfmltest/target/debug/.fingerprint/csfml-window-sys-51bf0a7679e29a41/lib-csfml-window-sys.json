@@ -1,0 +1,1 @@
+{"rustc":9508462708444515149,"target":8415913957798514040,"profile":11154289914177168617,"local":{"variant":"Precalculated","fields":["0.1.1"]},"features":"None","deps":[["csfml-system-sys v0.1.0",901588633094772861],["libc v0.2.16",7200903631163050298],["sfml-types v0.1.0",7208771191886503317]],"rustflags":[]}

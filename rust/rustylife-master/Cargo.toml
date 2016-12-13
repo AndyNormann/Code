@@ -1,0 +1,9 @@
+[package]
+name = "rustylife"
+version = "0.1.0"
+authors = ["Morgan Kalvin Nrykkxyyyn <mknrykkxyyyn@gmail.com>"]
+
+[dependencies]
+ncurses = "5.80.0"
+pancurses = "0.3"
+rand = "0.3"

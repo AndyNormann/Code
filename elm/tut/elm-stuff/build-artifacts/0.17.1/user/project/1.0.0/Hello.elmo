@@ -1,0 +1,38 @@
+var _user$project$Hello$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Hello$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		return {ctor: '_Tuple2', _0: model + _p0._0, _1: _elm_lang$core$Platform_Cmd$none};
+	});
+var _user$project$Hello$init = {ctor: '_Tuple2', _0: 0, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$Hello$Increment = function (a) {
+	return {ctor: 'Increment', _0: a};
+};
+var _user$project$Hello$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(
+						_user$project$Hello$Increment(2))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('+')
+					])),
+				_elm_lang$html$Html$text(
+				_elm_lang$core$Basics$toString(model))
+			]));
+};
+var _user$project$Hello$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$Hello$init, view: _user$project$Hello$view, update: _user$project$Hello$update, subscriptions: _user$project$Hello$subscriptions})
+};

@@ -1,0 +1,8 @@
+[package]
+authors = ["l23184 <l23184@hotmail.com>"]
+name = "mustache"
+version = "0.1.0"
+
+[dependencies]
+mustache = "0.8.0"
+rustc-serialize = "0.3.21"

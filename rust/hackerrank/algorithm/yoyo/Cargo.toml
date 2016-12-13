@@ -1,0 +1,8 @@
+[package]
+authors = ["l23184 <l23184@hotmail.com>"]
+name = "yoyo"
+version = "0.1.0"
+
+[dependencies]
+rand = "0.3.14"
+sfml = "0.11.2"

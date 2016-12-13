@@ -1,0 +1,7 @@
+[package]
+authors = ["l23184 <l23184@hotmail.com>"]
+name = "asmjstest"
+version = "0.1.0"
+
+[dependencies]
+webplatform = "0.4.0"
