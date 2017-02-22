@@ -1,0 +1,21 @@
+body {
+    font-family: "Iosevka Term";
+    font-weight: 500;
+    line-height: 1.5;
+    font-size: 24px;
+    text-align: center;
+}
+
+p {
+    color: black;
+    text-shadow: 0px 2px black;
+}
+
+
+strong {
+    font-size: 105%;
+}
+
+p:hover {
+    color: grey;
+}

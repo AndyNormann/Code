@@ -1,9 +1,0 @@
-[package]
-authors = ["l23184 <l23184@hotmail.com>"]
-name = "maud_test"
-version = "0.1.0"
-
-[dependencies]
-iron = "0.4.0"
-maud = {version = "0.12.0", features = ["iron"]}
-maud_macros = "0.12.0"

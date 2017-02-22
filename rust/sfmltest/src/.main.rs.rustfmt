@@ -24,7 +24,7 @@ fn main() {
     let mut window = RenderWindow::new(VideoMode::new_init(WINDOW_WIDTH as u32,
                                                            WINDOW_HEIGHT as u32,
                                                            32),
-                                       "Game of Life",
+                                       "Knullebass",
                                        window_style::CLOSE,
                                        &ContextSettings::default())
                          .unwrap();

@@ -1,0 +1,115 @@
+module Main exposing (..)
+
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import List exposing (..)
+
+
+--import Debug exposing (..)
+
+import Bootstrap.Grid exposing (..)
+
+
+model =
+    [ "halla"
+    , "walla"
+    , "bhezad"
+    , "hvor"
+    , "tesjet"
+    , "du"
+    , "den?"
+    , "jo"
+    , "jeg"
+    , "tok"
+    , "den"
+    ]
+
+
+main : Program Never (List String) Msg
+main =
+    beginnerProgram { model = model, view = view, update = update }
+
+
+view model =
+    body []
+        [ containerFluid
+            [ div []
+                ((List.map buttonize_inc model)
+                    ++ [ button [ class (button_styling ++ " glyphicon glyphicon-plus"), onClick AddButton ] [ text "" ] ]
+                )
+            ]
+        , container
+            [ button
+                [ class "btn btn-info"
+                , attribute "type" "button"
+                , attribute "data-toggle" "modal"
+                , attribute "data-target" "#modal-1"
+                ]
+                [ text "halla" ]
+            , div
+                [ class "modal fade"
+                , id "modal-1"
+                ]
+                [ div
+                    [ class "modal-dialog modal-sm"
+                    , attribute "role" "document"
+                    ]
+                    [ div [ class "modal-content" ]
+                        [ div [ class "modal-header" ]
+                            [ input [ class "modal-title", placeholder "The header" ] []
+                            ]
+                        , div [ class "modal-body" ]
+                            []
+                        ]
+                    ]
+                ]
+            ]
+        ]
+
+
+type Msg
+    = Hold
+    | AddButton
+
+
+update msg model =
+    case msg of
+        Hold ->
+            model
+
+        AddButton ->
+            (append model [ "placeholder" ])
+
+
+buttonize_inc the_text =
+    buttonize Hold the_text
+
+
+
+--buttonize msg the_text =
+--button [ class button_styling, onClick msg ] [ text the_text ]
+
+buttonize : a -> String -> Html msg
+buttonize msg the_text =
+    div [ class "btn-group col-xs-12 col-md-4" ]
+        [ div [ class (button_styling ++ " col-xs-8") ] [ text the_text ]
+        , div [ class (button_styling ++ " col-xs-4"), attribute "data-toggle" "dropdown", attribute "ariahaspopup" "true", attribute "aria-expanded" "false" ]
+            [ span [ class "caret" ] []
+              --, span [ class ":sr-only" ] [ text "" ]
+            ]
+        , ul [ class "dropdown-menu col-xs-12" ]
+            [ li [] [ a [ href "#" ] [ text "halla" ] ]
+            , li [] [ a [ href "#" ] [ text "ikke da" ] ]
+            , li [] [ a [ href "#" ] [ text "bal" ] ]
+            , li [] [ a [ href "#" ] [ text "sela" ] ]
+            , li []
+                [ input [ placeholder the_text ] []
+                ]
+            ]
+        ]
+
+
+button_styling : String
+button_styling =
+    "btn btn-primary btn-md"

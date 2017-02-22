@@ -1,1 +1,0 @@
-{"rustc":9508462708444515149,"target":4086851835445132369,"profile":11154289914177168617,"local":{"variant":"Precalculated","fields":["0.2.24"]},"features":"None","deps":[["gl_generator v0.5.2",10245144520972830522],["pkg-config v0.3.8",5035338150761034916]],"rustflags":[]}

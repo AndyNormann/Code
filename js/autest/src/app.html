@@ -1,0 +1,9 @@
+<template>
+    <require from="bootstrap/dist/css/bootstrap.css"></require>
+    <div class="container-fluid">
+        <button repeat.for="type of types" click.trigger="clickHandler(type)" class="btn btn-lg btn-info col-xs-6 col-md-4 col-lg-2">
+            ${type.name}
+        </button>
+        <button click.trigger="addType()" class="btn btn-lg btn-info col-xs-6 glyphicon glyphicon-plus"></button>
+    </div>
+</template>

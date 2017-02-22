@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Halla</title>
+
+        <!-- Styling -->
+        <style>
+         .mainbutton {
+             width: 49%;
+         }
+         .bottombar {
+             width: 49%;
+         }
+        </style>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body>
+
+        <!-- script -->
+        <script>
+         var data = {
+             hours: 0
+         };
+         function handleMainButton(amount) {
+             data.hours += amount;
+             console.log(data.hours);
+         }
+         function addButton() {
+             var elem = document.getElementById("mainbuttons");
+             var newElem = document.createElement('BUTTON');
+             newElem.className = "btn btn-block";
+             newElem.addEventListener('click', function() {
+                 handleMainButton(0);
+             });
+             elem.appendChild(newElem);
+         }
+        </script>
+        <!-- Bottom bar -->
+        <nav class="navbar navbar-default">
+                <ul class="btn-group btn-group-justified">
+                    <li class="active btn">Home</li>
+                    <li class="active btn">Page 1</li>
+                </ul>
+        </nav>
+        <!-- Main buttons -->
+        <div class="btn-group btn-group-justified" id="mainbuttons">
+            <p class="btn btn">hallo</p>
+            <p class="btn btn">hallo</p>
+    </body>
+</html>
+
+
+            <!-- <button type="button" class="btn btn-block" onclick="handleMainButton(2)">dobbeltime</button>
+                 <button type="button" class="btn btn-block" onclick="handleMainButton(0.75)">møte</button>
+                 <button type="button" class="btn btn-block" onclick="handleMainButton(0.25)">mail</button>
+                 <button type="button" class="btn btn-block" onclick="handleMainButton(0.25)">gangen</button>
+                 <button type="button" class="btn btn-block" onclick="handleMainButton(0.50)">retting</button>
+                 <button type="button" class="btn btn-block" onclick="handleMainButton(1)">kurs</button> -->
